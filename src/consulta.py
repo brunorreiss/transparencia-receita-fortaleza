@@ -13,11 +13,10 @@ from bs4 import BeautifulSoup
 
 # Local imports
 from src.models import Receita
-from utils.util import get_headers
+from utils.util import get_headers, is_number
 
 # Captura variaveis de ambiente e cria constants
 TIMEOUT = env.get('TIMEOUT', default=180)
-
 
 #---------------------------------------------------------------------------------------------------
 async def process_detalhes(soup: BeautifulSoup) -> list[Receita]:
@@ -59,15 +58,17 @@ async def process_detalhes(soup: BeautifulSoup) -> list[Receita]:
             continue
         
         receita = {}
+        # Usando a função no loop
         for i, cell in enumerate(cells):
-            value = cell.text.strip()
-            # Remove pontos e substitui vírgulas por pontos para valores numéricos
-            if i in [2, 3, 4, 5]:  # Inclui índice do percentual_realizado se necessário
-                value = value.replace('.', '').replace(',', '.')
-                value = float(value) if value else 0.0
-            # Tratamento especial para a última coluna que contém links
+            value = cell.text.strip().replace('.', '').replace(',', '.')
+            if i in [2, 3, 4, 5]:  # Supondo que esses índices sejam para valores numéricos
+                if is_number(value):
+                    value = float(value)
+                else:
+                    logger.warning(f"Valor não numérico encontrado, usando 0.0: {value}")
+                    value = 0.0
             if headers[i] == 'detalhamento' and cell.find('a'):
-                value = cell.find('a')['href']  # Captura o link
+                value = cell.find('a')['href'] if cell.find('a')['href'] else None
             receita[headers[i]] = value
         
         results.append(Receita(**receita))

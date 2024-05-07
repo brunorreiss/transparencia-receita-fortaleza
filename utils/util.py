@@ -24,3 +24,11 @@ def get_headers():
     # 1: Firefox browser headers
     # 2: Google Chrome browser headers
     return HEADERS[random.randint(0, 1)]
+
+#---------------------------------------------------------------------------------------
+def is_number(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False

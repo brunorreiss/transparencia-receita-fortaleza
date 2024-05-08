@@ -1,41 +1,57 @@
 body {
-    color: black;
-    background-color: #F0F0F0;
     font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #F0F0F0;
 }
 
 .header {
-    width: auto;
-    margin: 15px;
-    padding: 15px 30px 15px 30px;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px;
     border-radius: 20px;
     background: #F0F0F0;
-    box-shadow:  20px 20px 60px #E0E0E0,
-             -20px -20px 60px #ffffff;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    box-shadow: 20px 20px 60px #E0E0E0, -20px -20px 60px #ffffff;
 }
 
-.line {
+.header-content {
     display: flex;
+    flex-direction: column;
     align-items: center;
 }
 
-.header_title {
+.header-title {
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
-#logo {
-    padding: 15px 30px 15px 30px;;
-    width: 80px;
-    height: 95px;
+.header-links {
+    margin-top: 20px;
+}
+
+.header-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.header-links li {
+    margin-bottom: 10px;
+}
+
+.header-links a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.header-links a:hover {
+    text-decoration: underline;
 }
 
 #robot {
-    padding: 15px 30px 15px 30px;;
-    width: 35px;
-    height: 35px;
+    width: 50px;
+    height: 50px;
+    margin-left: 20px;
 }

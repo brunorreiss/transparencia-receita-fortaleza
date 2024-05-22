@@ -151,6 +151,12 @@ async def fetch(data_inicio, data_fim, ano_exercicio):
         else:
             resultado = await process_detalhes(resp_soup)
             
+            # Colocando data_inicio, data_fim e ano_exercicio no resultado
+            for r in resultado:
+                r.data_inicio = data_inicio
+                r.data_fim = data_fim
+                r.ano_referente = ano_exercicio
+            
             result = {
                 'code': 0,
                 'message': 'SUCCESS',

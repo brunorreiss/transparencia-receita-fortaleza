@@ -3,6 +3,10 @@ from pydantic import BaseModel
 from typing import List
 
 class Receita(BaseModel):
+    fonte_dos_dados: str = 'Portal da transparencia - Receitas detalhadas'
+    data_inicio: str = ''
+    data_fim: str = ''
+    ano_referente: str = ''
     categoria: str = ''
     origem: str = ''
     receita_prevista_no_ano: float = 0.0
